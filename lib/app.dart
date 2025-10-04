@@ -4,6 +4,7 @@ import 'package:nutrimedai/features/auth/home/presentation/pages/home_page.dart'
 import 'package:nutrimedai/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:nutrimedai/features/auth/presentation/cubits/auth_states.dart';
 import 'package:nutrimedai/features/auth/presentation/pages/auth_page.dart';
+import 'package:nutrimedai/features/auth/presentation/pages/medical_info_page.dart';
 import 'package:nutrimedai/features/profile/data/firebase_profile_repo.dart';
 import 'package:nutrimedai/features/profile/presentation/cubits/profile_cubit.dart';
 import 'package:nutrimedai/features/storage/data/firebase_storage_repo.dart';
@@ -53,8 +54,13 @@ class MyApp extends StatelessWidget {
               return const AuthPage();
             }
 
-            //  aunthenticated -> home page
+            //  authenticated -> check if medical info is completed
             if (authState is Authenticated) {
+              // Si el usuario no ha completado su información médica
+              if (!authState.user.medicalInfoCompleted) {
+                return const MedicalInfoPage();
+              }
+              // Si ya completó su información médica, ir a home
               return HomePage();
             }
             //  loading...

@@ -21,12 +21,8 @@ class FirebaseAuthRepo implements AuthRepo {
           .doc(userCredential.user!.uid)
           .get();
 
-      //  create user
-      AppUser user = AppUser(
-        uid: userCredential.user!.uid,
-        email: email,
-        name: userDoc["name"],
-      );
+      //  create user from firestore data
+      AppUser user = AppUser.fromJson(userDoc.data() as Map<String, dynamic>);
 
       //  return user
       return user;
@@ -96,11 +92,28 @@ class FirebaseAuthRepo implements AuthRepo {
       return null;
     }
 
-    //  return user
-    return AppUser(
-      uid: firebaseUser.uid,
-      email: firebaseUser.email!,
-      name: userDoc["name"], //
-    );
+    //  return user from firestore data
+    return AppUser.fromJson(userDoc.data() as Map<String, dynamic>);
+  }
+
+  @override
+  Future<void> updateMedicalInfo({
+    required String uid,
+    required int age,
+    required double weight,
+    required double height,
+    required List<String> diseases,
+  }) async {
+    try {
+      await firebaseFirestore.collection('users').doc(uid).update({
+        'age': age,
+        'weight': weight,
+        'height': height,
+        'diseases': diseases,
+        'medicalInfoCompleted': true,
+      });
+    } catch (e) {
+      throw Exception('Error updating medical info: $e');
+    }
   }
 }

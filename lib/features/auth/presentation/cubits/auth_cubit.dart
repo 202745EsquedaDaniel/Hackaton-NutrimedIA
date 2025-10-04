@@ -71,4 +71,48 @@ class AuthCubit extends Cubit<AuthState> {
     authRepo.logout();
     emit(Unauthenticated());
   }
+
+  //  update medical info
+  Future<void> updateMedicalInfo({
+    required int age,
+    required double weight,
+    required double height,
+    required List<String> diseases,
+  }) async {
+    try {
+      if (_currentUser == null) {
+        emit(AuthError("No user logged in"));
+        return;
+      }
+
+      emit(AuthLoading());
+
+      // Update medical info in database
+      await authRepo.updateMedicalInfo(
+        uid: _currentUser!.uid,
+        age: age,
+        weight: weight,
+        height: height,
+        diseases: diseases,
+      );
+
+      // Update current user with new medical info
+      _currentUser = _currentUser!.copyWith(
+        age: age,
+        weight: weight,
+        height: height,
+        diseases: diseases,
+        medicalInfoCompleted: true,
+      );
+
+      emit(Authenticated(_currentUser!));
+    } catch (e) {
+      emit(AuthError(e.toString()));
+      if (_currentUser != null) {
+        emit(Authenticated(_currentUser!));
+      } else {
+        emit(Unauthenticated());
+      }
+    }
+  }
 }

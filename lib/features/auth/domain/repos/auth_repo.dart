@@ -15,4 +15,11 @@ abstract class AuthRepo {
   );
   Future<void> logout();
   Future<AppUser?> getCurrentUser();
+  Future<void> updateMedicalInfo({
+    required String uid,
+    required int age,
+    required double weight,
+    required double height,
+    required List<String> diseases,
+  });
 }
