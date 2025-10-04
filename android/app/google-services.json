@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1081112030277",
+    "project_id": "nutrimedai",
+    "storage_bucket": "nutrimedai.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081112030277:android:9d0d101df4fa64f81fc72c",
+        "android_client_info": {
+          "package_name": "com.example.nutrimedai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1HWjWstyY1SMpAU0tyNUahfqmVy7SeOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
