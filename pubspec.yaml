@@ -41,6 +41,16 @@ dependencies:
   flutter_bloc: ^9.1.0
   cloud_firestore: ^5.6.2
   firebase_storage: ^12.4.4
+  
+  # Para escaneo de alimentos
+  image_picker: ^1.0.7
+  dio: ^5.4.0
+  
+  # Para gráficas
+  fl_chart: ^0.66.2
+  
+  # Para path del archivo
+  path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_test:

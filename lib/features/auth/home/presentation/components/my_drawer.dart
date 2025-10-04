@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nutrimedai/features/auth/home/presentation/components/my_drawer_tile.dart';
 import 'package:nutrimedai/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:nutrimedai/features/profile/presentation/pages/profile_page.dart';
+import 'package:nutrimedai/features/food_scanner/presentation/pages/food_scanner_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -13,14 +14,14 @@ class MyDrawer extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       child: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25.0),
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Column(
             children: [
               // app logo
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 50.0),
+                padding: const EdgeInsets.symmetric(vertical: 50.0),
                 child: Icon(
-                  Icons.person,
+                  Icons.restaurant_menu,
                   size: 80,
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -28,11 +29,26 @@ class MyDrawer extends StatelessWidget {
 
               Divider(color: Theme.of(context).colorScheme.secondary),
 
-              //home list time
+              //home list tile
               MyDrawerTile(
                 title: "H O M E ",
                 icon: Icons.home,
-                onTap: () => Navigator.of(context).pop(), //
+                onTap: () => Navigator.of(context).pop(),
+              ),
+
+              //Scanner tile
+              MyDrawerTile(
+                title: "E S C A N E A R",
+                icon: Icons.camera_alt,
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FoodScannerPage(),
+                    ),
+                  );
+                },
               ),
 
               //Profile tile
@@ -47,7 +63,7 @@ class MyDrawer extends StatelessWidget {
                   final user = context.read<AuthCubit>().currentUser;
                   String? uid = user!.uid;
 
-                  //  navigate to settings page
+                  //  navigate to profile page
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -57,7 +73,7 @@ class MyDrawer extends StatelessWidget {
                 },
               ),
 
-              //S E A R C H tile
+              //SETTINGS tile
               MyDrawerTile(
                 title: "S E T T I N G S",
                 icon: Icons.settings,
@@ -72,10 +88,10 @@ class MyDrawer extends StatelessWidget {
               MyDrawerTile(
                 title: "L O G O U T",
                 icon: Icons.logout,
-                onTap: () => context.read<AuthCubit>().logout(), //
+                onTap: () => context.read<AuthCubit>().logout(),
               ),
 
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
             ],
           ),
         ),

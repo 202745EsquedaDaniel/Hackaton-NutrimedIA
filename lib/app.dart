@@ -8,6 +8,7 @@ import 'package:nutrimedai/features/auth/presentation/pages/medical_info_page.da
 import 'package:nutrimedai/features/profile/data/firebase_profile_repo.dart';
 import 'package:nutrimedai/features/profile/presentation/cubits/profile_cubit.dart';
 import 'package:nutrimedai/features/storage/data/firebase_storage_repo.dart';
+import 'package:nutrimedai/features/food_scanner/presentation/cubits/food_scanner_cubit.dart';
 import 'package:nutrimedai/features/themes/light_mode.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,6 +42,9 @@ class MyApp extends StatelessWidget {
             storageRepo: firebaseStorageRepo,
           ),
         ),
+
+        // food scanner cubit
+        BlocProvider<FoodScannerCubit>(create: (context) => FoodScannerCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
